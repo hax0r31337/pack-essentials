@@ -21,9 +21,19 @@ jobs:
       with:
         node-version: 19
 
+    - name: cache dependencies for go
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-golang-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-golang-
+
     # npm install の際にキャッシュを使うよう設定
-    - name: cache dependencies
-      uses: actions/cache@v1
+    - name: cache dependencies for npm
+      uses: actions/cache@v3
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
