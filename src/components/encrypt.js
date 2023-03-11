@@ -30,7 +30,7 @@ export default function EncryptPage() {
                     {/* <Spinner className="h-5 w-5" /> */}
                     select a pack</button>
                 <button className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
-                    onClick={() => { window.open("https://github.com/hax0r31337") }}>
+                    onClick={() => { window.open("https://github.com/hax0r31337/pack-essentials") }}>
                     github repository</button></div>
         </div>
     )
