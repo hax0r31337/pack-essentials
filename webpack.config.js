@@ -13,8 +13,8 @@ module.exports = {
     },
     output: {
         path: __dirname + '/dist',
-        filename: '[name].js',
-        chunkFilename: '[name].js',
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js',
         publicPath: '/',
     },
     module: {
