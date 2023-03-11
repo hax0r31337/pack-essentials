@@ -1,32 +1,45 @@
 name: github pages
 
-# masterブランチにプッシュしたときjobsに記述した操作を行う
-on: [push, workflow_dispatch]
+# ワークフローをトリガーするイベントを定義します
+on:
+  # リポジトリにプッシュされたときに実行されます
+  push:
+  # 手動で実行するための 'ワークフローを実行' ボタンを使用して実行されます
+  workflow_dispatch:
 
+# ワークフローの実行に必要な権限を定義します
 permissions:
+  # ファイルの内容を読み取る権限が必要です
   contents: read
+  # ページを書き込む権限が必要です
   pages: write
+  # IDトークンを書き込む権限が必要です
   id-token: write
 
+# ジョブを定義します
 jobs:
+  # ビルドジョブを定義します
   build:
-    # ubuntu OS を仮想マシン上に用意する
+    # 仮想マシンで実行するオペレーティングシステムを指定します
     runs-on: ubuntu-latest
     steps:
+      # リポジトリの内容をチェックアウトします
       - name: checkout
         uses: actions/checkout@v3
 
+      # Goのセットアップを行います
       - name: setup go
         uses: actions/setup-go@v3
         with:
           go-version: '1.20'
 
-      # Node.js環境のセットアップを行う
+      # Node.js環境のセットアップを行います
       - name: setup node
         uses: actions/setup-node@v3
         with:
           node-version: 19
 
+      # Goの依存関係をキャッシュします
       - name: cache dependencies for go
         uses: actions/cache@v3
         with:
@@ -49,12 +62,12 @@ jobs:
       # package.jsonに基づき依存パッケージをインストールする
       - name: install
         run: npm install --frozen-lockfile
-    
+
+      # WASMをビルドします
       - name: build wasm
         run: ./build_wasm.sh
 
-      # Next.jsアプリをビルドする
-      # プロジェクトルート直下に.nextディレクトリができる
+      # Reactアプリをビルドします
       - name: build
         run: npm run build
 
@@ -64,6 +77,7 @@ jobs:
       - name: add nojekyll
         run: touch ./dist/.nojekyll
 
+      # CNAMEファイルを追加する
       - name: add cname
         run: cp CNAME ./dist/CNAME
 
