@@ -58,8 +58,8 @@ jobs:
     - name: add nojekyll
       run: touch ./dist/.nojekyll
 
-    # - name: add cname
-    #   run: cp CNAME ./dist/CNAME
+    - name: add cname
+      run: cp CNAME ./dist/CNAME
 
     # gh-pagesブランチにoutディレクトリの中身をプッシュする
     # gh-pagesブランチは自動的に作成される
