@@ -8,61 +8,62 @@ jobs:
     # ubuntu OS を仮想マシン上に用意する
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v3
 
-    - name: setup go
-      uses: actions/setup-go@v3
-      with:
-        go-version: '1.20'
+      - name: setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
 
-    # Node.js環境のセットアップを行う
-    - name: setup node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 19
+      # Node.js環境のセットアップを行う
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
 
-    - name: cache dependencies for go
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cache/go-build
-          ~/go/pkg/mod
-        key: ${{ runner.os }}-golang-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-golang-
+      - name: cache dependencies for go
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-golang-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-golang-
 
-    # npm install の際にキャッシュを使うよう設定
-    - name: cache dependencies for npm
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      # npm install の際にキャッシュを使うよう設定
+      - name: cache dependencies for npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    # package.jsonに基づき依存パッケージをインストールする
-    - name: install
-      run: npm install --frozen-lockfile
+      # package.jsonに基づき依存パッケージをインストールする
+      - name: install
+        run: npm install --frozen-lockfile
     
-    - name: build wasm
-      run: ./build_wasm.sh
+      - name: build wasm
+        run: ./build_wasm.sh
 
-    # Next.jsアプリをビルドする
-    # プロジェクトルート直下に.nextディレクトリができる
-    - name: build
-      run: npm run build
+      # Next.jsアプリをビルドする
+      # プロジェクトルート直下に.nextディレクトリができる
+      - name: build
+        run: npm run build
 
-    # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
-    # つまりHTMLからJSを読み込めない
-    # これを回避するために.nojekyllファイルをoutディレクトリに作る
-    - name: add nojekyll
-      run: touch ./dist/.nojekyll
-      
-    - name: add cname
-      run: cp CNAME ./dist/CNAME
+      # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
+      # つまりHTMLからJSを読み込めない
+      # これを回避するために.nojekyllファイルをoutディレクトリに作る
+      - name: add nojekyll
+        run: touch ./dist/.nojekyll
 
-    # gh-pagesブランチにdistディレクトリの中身をプッシュする
-    # gh-pagesブランチは自動的に作成される
+      - name: add cname
+        run: cp CNAME ./dist/CNAME
+
+      # gh-pagesブランチにdistディレクトリの中身をプッシュする
+      # gh-pagesブランチは自動的に作成される
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
