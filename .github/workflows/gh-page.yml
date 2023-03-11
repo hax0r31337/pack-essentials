@@ -57,7 +57,7 @@ jobs:
     # これを回避するために.nojekyllファイルをoutディレクトリに作る
     - name: add nojekyll
       run: touch ./dist/.nojekyll
-
+      
     - name: add cname
       run: cp CNAME ./dist/CNAME
 
@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
-          
+
   deploy:
     environment:
       name: github-pages
