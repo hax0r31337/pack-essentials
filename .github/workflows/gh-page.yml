@@ -4,7 +4,7 @@ name: github pages
 on: [push, workflow_dispatch]
 
 jobs:
-  build-deploy:
+  build:
     # ubuntu OS を仮想マシン上に用意する
     runs-on: ubuntu-latest
     steps:
@@ -61,10 +61,20 @@ jobs:
     - name: add cname
       run: cp CNAME ./dist/CNAME
 
-    # gh-pagesブランチにoutディレクトリの中身をプッシュする
+    # gh-pagesブランチにdistディレクトリの中身をプッシュする
     # gh-pagesブランチは自動的に作成される
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist
+          
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
