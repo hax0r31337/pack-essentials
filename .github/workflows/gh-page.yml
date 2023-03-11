@@ -3,6 +3,11 @@ name: github pages
 # masterブランチにプッシュしたときjobsに記述した操作を行う
 on: [push, workflow_dispatch]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     # ubuntu OS を仮想マシン上に用意する
