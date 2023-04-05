@@ -37,8 +37,7 @@ export default class Modal extends React.Component {
 
         return ReactDOM.createPortal(
             <div
-                id="modal-comp"
-                className={displayClass}
+                className={"fixed top-0 bottom-0 right-0 left-0 z-3 bg-black bg-opacity-30 " + displayClass}
                 onKeyDown={(e) => this.handleKeydown(e)}
                 onClick={(e) => this.handleClickOutside(e)}
             >
