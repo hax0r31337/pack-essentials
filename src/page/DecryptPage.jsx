@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Modal from '../components/Modal'
 
 export default function EncryptPage() {
@@ -51,9 +52,9 @@ export default function EncryptPage() {
                     className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-blue-100 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
                     onClick={() => inputFile.current.click()}>
                     select a pack</button>
-                <a className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
-                    href="/encrypt">
-                    encrypt</a>
+                <Link className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
+                    to="/encrypt">
+                    encrypt</Link>
             </div>
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                 <div className="flex justify-between items-center">
