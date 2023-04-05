@@ -70,16 +70,11 @@ jobs:
       # Reactアプリをビルドします
       - name: build
         run: npm run build
-
-      # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
-      # つまりHTMLからJSを読み込めない
-      # これを回避するために.nojekyllファイルをoutディレクトリに作る
-      - name: add nojekyll
-        run: touch ./dist/.nojekyll
-
-      # CNAMEファイルを追加する
-      - name: add cname
-        run: cp CNAME ./dist/CNAME
+      
+      - name: copy index
+        run: |
+          cp dist/index.html dist/encrypt.html
+          cp dist/index.html dist/decrypt.html
 
       # gh-pagesブランチにdistディレクトリの中身をプッシュする
       # gh-pagesブランチは自動的に作成される

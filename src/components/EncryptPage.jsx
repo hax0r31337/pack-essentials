@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
-import Spinner from './spinner'
 
 export default function EncryptPage() {
-    const inputFile = useRef(null) 
+    const inputFile = useRef(null)
     const onInputFileChange = (e) => {
         let fileReader = new FileReader()
         fileReader.onload = (event) => {

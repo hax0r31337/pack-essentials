@@ -1,7 +1,8 @@
-mkdir -p wasm/build
+mkdir -p public/assets
 
 # js glue for wasm library
-cp -R -u -p "$(go env GOROOT)/misc/wasm/wasm_exec.js" wasm/build/wasm_exec.js
+cp -R -u -p "$(go env GOROOT)/misc/wasm/wasm_exec.js" ./public/assets/wasm_exec.js
 
 # build wasm library
- GOOS=js GOARCH=wasm go build -C wasm -v -trimpath -ldflags "-s -w -buildid=" -o build/libresourcepack.wasm 
+cd wasm
+GOOS=js GOARCH=wasm go build -v -trimpath -ldflags "-s -w -buildid=" -o ../public/assets/libresourcepack.wasm 
