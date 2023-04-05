@@ -39,6 +39,7 @@ export default class App extends React.Component {
 
     window.errorHandler = function (error) {
       console.error(error)
+      alert(error)
     }
   }
   render() {

@@ -16,9 +16,9 @@ export default function EncryptPage() {
 
     return (
         <div className="bg-gray-800 flex flex-col justify-center h-full" style={{ 'paddingLeft': '5%', 'paddingRight': '5%' }}>
-            <h1 className="text-5xl font-extrabold tracking-tight text-blue-100 leading-10">pack essentials.</h1>
+            <h1 className="text-5xl font-extrabold tracking-tight text-blue-100 leading-10">encrypt my pack.</h1>
             <p style={{ 'maxWidth': '600px' }} className="text-clip text-base text-blue-100 font-regular pt-6">
-                select the pack you want to encrypt and we'll encrypt it inside your browser.
+                select the pack you want to encrypt and we'll encrypt it <b>inside your browser</b>.
                 you'll receive the encrypted pack and the encryption key.
             </p>
             <div className="pt-5 flex flex-row gap-3">
@@ -26,11 +26,11 @@ export default function EncryptPage() {
                 <button
                     className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-blue-100 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
                     onClick={() => inputFile.current.click()}>
-                    {/* <Spinner className="h-5 w-5" /> */}
                     select a pack</button>
-                <button className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
-                    onClick={() => { window.open("https://github.com/hax0r31337/pack-essentials") }}>
-                    github repository</button></div>
+                <a className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
+                    href="/decrypt">
+                    decrypt</a>
+            </div>
         </div>
     )
 }

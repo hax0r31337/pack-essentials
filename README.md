@@ -1,5 +1,5 @@
 # Pack Essentials
-An open-source alternative to [encryptmypack](encryptmypack.com), which allows you encrypt Minecraft: BE resource packs inside your browser
+An open-source alternative to [encryptmypack](encryptmypack.com), which allows you encrypt and decrypt Minecraft: BE resource packs inside your browser
 
 ## Build
 1. Install go and npm
@@ -8,7 +8,7 @@ An open-source alternative to [encryptmypack](encryptmypack.com), which allows y
 4. The site is ready in `./dist`
 
 ## Todo
- - decrypt packs
+ - not freeze the website while processing
 
 ## Credits
-[mcrputils](https://github.com/valaphee/mcrputil/) for the mechanics of encrypt and decrypt algorithm   
+[mcrputils](https://github.com/valaphee/mcrputil/) for the encryption and decryption algorithm   
