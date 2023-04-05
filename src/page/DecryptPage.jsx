@@ -66,7 +66,8 @@ export default function EncryptPage() {
                         ref={inputKeyFile} onChange={onInputKeyFileChange} />
 
                     <input className="bg-gray-700 rounded-lg border border-gray-300 px-4 py-2" style={{ 'display': isInputMode ? 'block' : 'none' }}
-                        type="text" value={resourcePackKeyStr} onChange={(e) => setResourcePackKeyStr(e.target.value)} />
+                        type="text" placeholder="input the key in base64 form"
+                        value={resourcePackKeyStr} onChange={(e) => setResourcePackKeyStr(e.target.value)} />
 
                     <div className="pt-3 flex flex-row gap-3 float-right">
                         <button className="bg-blue-300 hover:bg-blue-200 text-blue-900 font-bold py-2 px-4 rounded-xl transition ease-in-out duration-150"
